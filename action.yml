@@ -22,6 +22,9 @@ inputs:
   environment:
     description: Environment
     required: false
+  rollback:
+    description: Send rollback message
+    required: false
 outputs:
   message-json: 
     description: 'JSON format of the message sent.'

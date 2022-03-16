@@ -11,6 +11,7 @@ try {
     const title: string = getInput('title');
     const tag: string = getInput('tag');
     const environment: string = getInput('environment');
+    const rollback: string = getInput('rollback');
 
     if (tag == 'true') {
 
@@ -35,6 +36,9 @@ try {
     } else {
 
         let text: string = `Microservice deployed in ${environment}`;
+        if (rollback == 'true')
+            text = `Rollback in ${environment}`;
+
         let cliqMessage = {
             text: text || '',
             bot: {
