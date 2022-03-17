@@ -35,9 +35,9 @@ try {
 
     } else {
 
-        let text: string = `Microservice deployed in ${environment}`;
+        let text: string = `Deployed ${tag} in ${environment}`;
         if (rollback == 'true')
-            text = `Rollback in ${environment}`;
+            text = `Rollback ${tag} in ${environment}`;
 
         let cliqMessage = {
             text: text || '',
