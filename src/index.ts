@@ -16,7 +16,7 @@ try {
 
     if (tag == 'true') {
 
-        exec('git tag -l --sort=-creatordate | head -n 1', (error, stdout, stderr) => {
+        exec("git tag --format='%(refname:strip=2)' --sort=creatordate | grep -i '^[1-9]' | tail -n 1", (error, stdout, stderr) => {
 
             stdout = stdout.replace('\n', '');
             let urlTemplate: string = `Cambios release [${stdout}](https://github.com/ndcmsl/${title}/releases/tag/${stdout})`;
