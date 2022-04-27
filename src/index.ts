@@ -36,9 +36,14 @@ try {
 
     } else {
 
-        let text: string = `Deployed ${version} in ${environment}`;
+        const emojis: any = {
+            prod: "🚀",
+            integration: "🛠"
+        }
+
+        let text: string = `Deployed ${version} in ${environment} ${emojis.environment || ' '}`;
         if (rollback == 'true')
-            text = `Rollback ${version} in ${environment}`;
+            text = `Rollback ${version} in ${environment} ${emojis.environment || ' '}`;
 
         let cliqMessage = {
             text: text || '',
