@@ -13,6 +13,7 @@ try {
     const environment: string = getInput('environment');
     const rollback: string = getInput('rollback');
     const version: string = getInput('version');
+    const ref: string = getInput('ref');
 
     if (tag == 'true') {
 
@@ -41,21 +42,41 @@ try {
             integration: "🛠"
         }
 
-        let text: string = `Deployed ${version} in ${environment} ${emojis[environment] || ''}`;
-        if (rollback == 'true')
-            text = `Rollback ${version} in ${environment} ${emojis[environment] || ''}`;
+        if (ref == 'main') {
 
-        let cliqMessage = {
-            text: text || '',
-            bot: {
-                name: senderName || '',
-                image: senderImage || ''
-            },
-            card: {
-                title: title || '',
-            }
-        };
-        sendMessage(cliqMessage);
+            let text: string = `Deployed ${version} in ${environment} ${emojis[environment] || ''}`;
+            if (rollback == 'true')
+                text = `Rollback ${version} in ${environment} ${emojis[environment] || ''}`;
+
+            let cliqMessage = {
+                text: text || '',
+                bot: {
+                    name: senderName || '',
+                    image: senderImage || ''
+                },
+                card: {
+                    title: title || '',
+                }
+            };
+            sendMessage(cliqMessage);
+
+        } else {
+
+            let text: string = `Deployed ref ${ref} in ${environment} ${emojis[environment] || ''}`;
+
+            let cliqMessage = {
+                text: text || '',
+                bot: {
+                    name: senderName || '',
+                    image: senderImage || ''
+                },
+                card: {
+                    title: title || '',
+                }
+            };
+            sendMessage(cliqMessage);
+
+        }
 
     }
 
