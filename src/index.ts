@@ -2,6 +2,19 @@ import { getInput, setOutput, setFailed } from '@actions/core';
 import axios from 'axios';
 const { exec } = require("child_process");
 
+function createMessage(text: string, senderName: string, senderImage: string, title: string) {
+    return {
+        text: text || '',
+        bot: {
+            name: senderName || '',
+            image: senderImage || ''
+        },
+        card: {
+            title: title || '',
+        }
+    };
+}
+
 try {
 
     const webhook: string = getInput('webhook');
@@ -21,16 +34,7 @@ try {
 
             stdout = stdout.replace('\n', '');
             let urlTemplate: string = `Cambios release [${stdout}](https://github.com/ndcmsl/${title}/releases/tag/${stdout})`;
-            let cliqMessage = {
-                text: urlTemplate || '',
-                bot: {
-                    name: senderName || '',
-                    image: senderImage || ''
-                },
-                card: {
-                    title: title || '',
-                }
-            };
+            let cliqMessage = createMessage(urlTemplate, senderName, senderImage, title);
             sendMessage(cliqMessage);
 
         });
@@ -42,41 +46,12 @@ try {
             integration: "🛠"
         }
 
-        if (ref == 'main') {
+        let text: string = `Deployed ${ref == 'main' ? version : ref} in ${environment} ${emojis[environment] || ''}`;
+        if (rollback == 'true')
+            text = `Rollback ${version} in ${environment} ${emojis[environment] || ''}`;
 
-            let text: string = `Deployed ${version} in ${environment} ${emojis[environment] || ''}`;
-            if (rollback == 'true')
-                text = `Rollback ${version} in ${environment} ${emojis[environment] || ''}`;
-
-            let cliqMessage = {
-                text: text || '',
-                bot: {
-                    name: senderName || '',
-                    image: senderImage || ''
-                },
-                card: {
-                    title: title || '',
-                }
-            };
-            sendMessage(cliqMessage);
-
-        } else {
-
-            let text: string = `Deployed ref ${ref} in ${environment} ${emojis[environment] || ''}`;
-
-            let cliqMessage = {
-                text: text || '',
-                bot: {
-                    name: senderName || '',
-                    image: senderImage || ''
-                },
-                card: {
-                    title: title || '',
-                }
-            };
-            sendMessage(cliqMessage);
-
-        }
+        let cliqMessage = createMessage(text, senderName, senderImage, title);
+        sendMessage(cliqMessage);
 
     }
 
