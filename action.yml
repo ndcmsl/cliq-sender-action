@@ -25,6 +25,12 @@ inputs:
   rollback:
     description: Send rollback message
     required: false
+  version:
+    description: Send version message
+    required: false
+  ref:
+    description: Send ref message
+    required: false 
 outputs:
   message-json: 
     description: 'JSON format of the message sent.'
