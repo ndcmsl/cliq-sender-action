@@ -28,6 +28,7 @@ inputs:
   ref:
     description: Send ref message
     required: false 
+    default: main
 outputs:
   message-json: 
     description: 'JSON format of the message sent.'
