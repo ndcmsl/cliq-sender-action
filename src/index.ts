@@ -13,7 +13,8 @@ const ref: string = getInput('ref');
 const emojis: any = {
     PKT: "🚀",
     AWS: "🚀",
-    INT: "🛠"
+    INT: "🛠",
+    BEAST_CENTOS_9: "🛠"
 }
 
 function createMessage(text: string, senderName: string, senderImage: string, title: string) {
@@ -34,7 +35,8 @@ function createText(mode: string) {
     const text: any = {
         release: `Cambios release [${version}](https://github.com/ndcmsl/${title}/releases/tag/${version})`,
         deploy: `Deployed ${ref == 'main' ? version : ref} in ${infrastructure} ${emojis[infrastructure] || ''}`,
-        rollback: `Rollback ${version} in ${infrastructure} ${emojis[infrastructure] || ''}`
+        rollback: `Rollback ${version} in ${infrastructure} ${emojis[infrastructure] || ''}`,
+        setup: `Setup ${ ref == 'main' ? version : ref } in ${ infrastructure } ${ emojis[infrastructure] || '' }`
     }
 
     return text[mode];
