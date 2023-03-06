@@ -12,9 +12,9 @@ const version: string = getInput('version');
 const ref: string = getInput('ref');
 const emojis: any = {
     PKT: "🚀",
-    AWS: "🚀",
+    "PKT-CentOS-9": "🚀",
     INT: "🛠",
-    BEAST_CENTOS_9: "🛠"
+    "BEAST-CentOS-9": "🛠"
 }
 
 function createMessage(text: string, senderName: string, senderImage: string, title: string) {
